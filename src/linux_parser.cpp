@@ -60,7 +60,7 @@ vector<int> LinuxParser::Pids() {
       string filename(file->d_name);
       if (std::all_of(filename.begin(), filename.end(), isdigit)) {
         int pid = stoi(filename);
-        pids.push_back(pid);
+        pids.emplace_back(pid);
       }
     }
   }
@@ -68,7 +68,7 @@ vector<int> LinuxParser::Pids() {
   return pids;
 }
 
-// TODO: Read and return the system memory utilization
+// DONE: Read and return the system memory utilization
 // replace colon
 float LinuxParser::MemoryUtilization() { 
   string line;
@@ -94,7 +94,7 @@ float LinuxParser::MemoryUtilization() {
   return 1.0 * (totalMemory - freeMemory) / totalMemory;
 }
 
-// TODO: Read and return the system uptime
+// DONE: Read and return the system uptime
 long LinuxParser::UpTime() { 
   string line;
   float upSecond;
@@ -109,13 +109,12 @@ long LinuxParser::UpTime() {
   return upTime; 
 }
 
-// TODO: Read and return the number of jiffies for the system
+// DONE: Read and return the number of jiffies for the system
 long LinuxParser::Jiffies() {
   return LinuxParser::ActiveJiffies() + LinuxParser::IdleJiffies(); 
 }
 
-// TODO: Read and return the number of active jiffies for a PID
-// REMOVE: [[maybe_unused]] once you define the function
+// DONE: Read and return the number of active jiffies for a PID
 long LinuxParser::ActiveJiffies(int pid) {
   string line, key;
   vector<string> values;
@@ -124,7 +123,7 @@ long LinuxParser::ActiveJiffies(int pid) {
     std::getline(filestream, line);
     std::istringstream linestream(line);
     while (linestream >> key) {
-      values.push_back(key);
+      values.emplace_back(key);
     }
   }
   long jiffies = 0;
@@ -138,7 +137,7 @@ long LinuxParser::ActiveJiffies(int pid) {
   return jiffies;
 }
 
-// TODO: Read and return the number of active jiffies for the system
+// DONE: Read and return the number of active jiffies for the system
 long LinuxParser::ActiveJiffies() { 
   vector<string> values = LinuxParser::CpuUtilization();
   return stol(values[CPUStates::kUser_]) + stol(values[CPUStates::kNice_]) +
@@ -146,13 +145,13 @@ long LinuxParser::ActiveJiffies() {
          stol(values[CPUStates::kSoftIRQ_]) + stol(values[CPUStates::kSteal_]); 
 }
 
-// TODO: Read and return the number of idle jiffies for the system
+// DONE: Read and return the number of idle jiffies for the system
 long LinuxParser::IdleJiffies() {
   vector<string> values = LinuxParser::CpuUtilization();
   return stol(values[CPUStates::kIdle_]) + stol(values[CPUStates::kIOwait_]); 
 }
 
-// TODO: Read and return CPU utilization
+// DONE: Read and return CPU utilization
 vector<string> LinuxParser::CpuUtilization() { 
   string line;
   string key, value;
@@ -163,7 +162,7 @@ vector<string> LinuxParser::CpuUtilization() {
       std::istringstream linestream(line);
       while (linestream >> value) {
         if (key != "cpu") {
-          CPUs.push_back(value);
+          CPUs.emplace_back(value);
         }
       }
     }
@@ -171,7 +170,7 @@ vector<string> LinuxParser::CpuUtilization() {
   return CPUs;
 }
 
-// TODO: Read and return the total number of processes
+// DONE: Read and return the total number of processes
 int LinuxParser::TotalProcesses() {
   string line;
   string key;
@@ -190,7 +189,7 @@ int LinuxParser::TotalProcesses() {
   return value;
 }
 
-// TODO: Read and return the number of running processes
+// DONE: Read and return the number of running processes
 int LinuxParser::RunningProcesses() {
   string line;
   string key;
@@ -209,19 +208,20 @@ int LinuxParser::RunningProcesses() {
   return value;
 }
 
-// TODO: Read and return the command associated with a process
-// REMOVE: [[maybe_unused]] once you define the function
+// DONE: Read and return the command associated with a process
 string LinuxParser::Command(int pid) { 
-  string command;
+  string value, command;
   std::ifstream filestream(kProcDirectory + to_string(pid) + kCmdlineFilename);
   if (filestream.is_open()) {
-    std::getline(filestream, command);
-  }
+    std::getline(filestream, value);
+    }
+  // keep the command after last slash  
+  std::size_t found = value.find_last_of("/\\");
+  command = value.substr(found + 1);
   return command;
 }
 
-// TODO: Read and return the memory used by a process
-// REMOVE: [[maybe_unused]] once you define the function
+// DONE: Read and return the memory used by a process
 string LinuxParser::Ram(int pid) {
   string line, key;
   int value;
@@ -230,7 +230,7 @@ string LinuxParser::Ram(int pid) {
     while (std::getline(filestream, line)) {
       std::istringstream linestream(line);
       while (linestream >> key >> value) {
-        if (key == "VmSize:") {
+        if (key == "VmRSS:") {
           return to_string(value / 1024);
         }
       }
@@ -239,8 +239,7 @@ string LinuxParser::Ram(int pid) {
   return "0";
 }
 
-// TODO: Read and return the user ID associated with a process
-// REMOVE: [[maybe_unused]] once you define the function
+// DONE: Read and return the user ID associated with a process
 string LinuxParser::Uid(int pid) {
   string line, key, value;
   std::ifstream filestream(kProcDirectory + to_string(pid) + kStatusFilename);
@@ -257,8 +256,7 @@ string LinuxParser::Uid(int pid) {
   return "0"; 
 }
 
-// TODO: Read and return the user associated with a process
-// REMOVE: [[maybe_unused]] once you define the function
+// DONE: Read and return the user associated with a process
 string LinuxParser::User(int pid) { 
   string line, name, x, id;
   std::ifstream filestream(kPasswordPath);
@@ -276,8 +274,7 @@ string LinuxParser::User(int pid) {
   return "n.a"; 
 }
 
-// TODO: Read and return the uptime of a process
-// REMOVE: [[maybe_unused]] once you define the function
+// DONE: Read and return the uptime of a process
 long LinuxParser::UpTime(int pid) {
   string line, value;
   vector<string> values;
@@ -287,7 +284,7 @@ long LinuxParser::UpTime(int pid) {
     while (std::getline(filestream, line)) {
       std::istringstream linestream(line);
       while (linestream >>  value) {
-        values.push_back(value);
+        values.emplace_back(value);
       }
     }
   }

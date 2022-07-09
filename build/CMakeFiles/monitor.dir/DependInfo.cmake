@@ -4,13 +4,13 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/yu/CPP/CppND-System-Monitor-Project-Updated/src/format.cpp" "/home/yu/CPP/CppND-System-Monitor-Project-Updated/build/CMakeFiles/monitor.dir/src/format.cpp.o"
-  "/home/yu/CPP/CppND-System-Monitor-Project-Updated/src/linux_parser.cpp" "/home/yu/CPP/CppND-System-Monitor-Project-Updated/build/CMakeFiles/monitor.dir/src/linux_parser.cpp.o"
-  "/home/yu/CPP/CppND-System-Monitor-Project-Updated/src/main.cpp" "/home/yu/CPP/CppND-System-Monitor-Project-Updated/build/CMakeFiles/monitor.dir/src/main.cpp.o"
-  "/home/yu/CPP/CppND-System-Monitor-Project-Updated/src/ncurses_display.cpp" "/home/yu/CPP/CppND-System-Monitor-Project-Updated/build/CMakeFiles/monitor.dir/src/ncurses_display.cpp.o"
-  "/home/yu/CPP/CppND-System-Monitor-Project-Updated/src/process.cpp" "/home/yu/CPP/CppND-System-Monitor-Project-Updated/build/CMakeFiles/monitor.dir/src/process.cpp.o"
-  "/home/yu/CPP/CppND-System-Monitor-Project-Updated/src/processor.cpp" "/home/yu/CPP/CppND-System-Monitor-Project-Updated/build/CMakeFiles/monitor.dir/src/processor.cpp.o"
-  "/home/yu/CPP/CppND-System-Monitor-Project-Updated/src/system.cpp" "/home/yu/CPP/CppND-System-Monitor-Project-Updated/build/CMakeFiles/monitor.dir/src/system.cpp.o"
+  "/home/yu/CPP/CppND-System-Monitor/src/format.cpp" "/home/yu/CPP/CppND-System-Monitor/build/CMakeFiles/monitor.dir/src/format.cpp.o"
+  "/home/yu/CPP/CppND-System-Monitor/src/linux_parser.cpp" "/home/yu/CPP/CppND-System-Monitor/build/CMakeFiles/monitor.dir/src/linux_parser.cpp.o"
+  "/home/yu/CPP/CppND-System-Monitor/src/main.cpp" "/home/yu/CPP/CppND-System-Monitor/build/CMakeFiles/monitor.dir/src/main.cpp.o"
+  "/home/yu/CPP/CppND-System-Monitor/src/ncurses_display.cpp" "/home/yu/CPP/CppND-System-Monitor/build/CMakeFiles/monitor.dir/src/ncurses_display.cpp.o"
+  "/home/yu/CPP/CppND-System-Monitor/src/process.cpp" "/home/yu/CPP/CppND-System-Monitor/build/CMakeFiles/monitor.dir/src/process.cpp.o"
+  "/home/yu/CPP/CppND-System-Monitor/src/processor.cpp" "/home/yu/CPP/CppND-System-Monitor/build/CMakeFiles/monitor.dir/src/processor.cpp.o"
+  "/home/yu/CPP/CppND-System-Monitor/src/system.cpp" "/home/yu/CPP/CppND-System-Monitor/build/CMakeFiles/monitor.dir/src/system.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

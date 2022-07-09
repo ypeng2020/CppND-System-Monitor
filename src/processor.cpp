@@ -4,7 +4,7 @@
 #include "linux_parser.h"
 using std::string;
 
-// TODO: Return the aggregate CPU utilization
+// DONE: Return the aggregate CPU utilization
 float Processor::Utilization() { 
   string line;
   string key;
